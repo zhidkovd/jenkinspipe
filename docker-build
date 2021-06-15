@@ -1,0 +1,29 @@
+#!groovy
+// Check ub1 properties
+properties([disableConcurrentBuilds()])
+
+pipeline {
+    agent {
+        label 'master'
+        }
+    options {
+        buildDiscarder(logRotator(numToKeepStr: '10', artifactNumToKeepStr: '10'))
+        timestamps()
+    }
+    stages {
+        stage("Create site nginx") {
+            steps {
+                sh 'ssh root@vm2'
+                echo "========Build docker container========"
+                dir ('dockerfiles') {
+                    sh 'docker build -t nginx-site-test-jenkins .'
+                }
+            }
+        }
+        stage("Run docker container") {
+            steps {
+                sh 'docker run -d -p 80:80 --name site nginx-site-test-jenkins'
+            }
+        }
+    }
+}
