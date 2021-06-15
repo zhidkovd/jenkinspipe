@@ -17,7 +17,7 @@ pipeline {
             }
         }
     }
-stages {
+    stages {
         stage("Secondary step") {
             steps {
                 sh 'ssh root@vm2 \'ls\''
