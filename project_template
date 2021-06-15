@@ -16,16 +16,11 @@ pipeline {
                 sh 'ssh root@vm2 \'hostname\''
             }
         }
-    stages {
+    }
+stages {
         stage("Secondary step") {
             steps {
                 sh 'ssh root@vm2 \'ls\''
-            }
-        }
-    stages {
-        stage("Secondary step") {
-            steps {
-                sh 'ssh root@vm2 \'echo Hello\''
             }
         }
     }
