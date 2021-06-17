@@ -16,14 +16,14 @@ pipeline {
                 sh 'ssh root@10.128.0.8'
                 echo "========Build docker container========"
                 dir ('dockerfiles') {
-                    sh 'docker build -t nginx-site-test-jenkins .'
+                    sh 'sudo docker build -f Dockerfile -t nginx-site-test-jenkins .'
                 }
             }
         }
         stage("Run docker container") {
             steps {
                 sh 'ssh root@10.128.0.8'
-                sh 'docker run -d -p 80:80 --name site nginx-site-test-jenkins'
+                sh 'sudo docker run -d -p 80:80 --name site nginx-site-test-jenkins'
             }
         }
     }
