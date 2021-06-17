@@ -22,6 +22,7 @@ pipeline {
         }
         stage("Run docker container") {
             steps {
+                sh 'ssh root@vm2'
                 sh 'docker run -d -p 80:80 --name site nginx-site-test-jenkins'
             }
         }
