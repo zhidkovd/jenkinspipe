@@ -15,7 +15,7 @@ pipeline {
             steps {
                 echo "========Build docker container========"
                 dir ('dockerfiles') {
-                    sh 'docker build .'
+                    sh 'docker build -f Dockerfile -t nginx-site-test-jenkins . '
                 }
             }
         }
